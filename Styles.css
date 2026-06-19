@@ -1,1 +1,47 @@
-/* Estilos del proyecto Sabores de Mundo */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0b3d91, #1f5fbf);
+    color: white;
+}
+
+.contenedor {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+h2 {
+    margin-top: 0;
+    color: #f4c542;
+    font-weight: normal;
+}
+
+.scanner {
+    margin: 30px 0;
+    padding: 25px;
+    width: 80%;
+    max-width: 500px;
+    border: 3px dashed #f4c542;
+    border-radius: 12px;
+    font-size: 1.2rem;
+}
+
+.bienvenida {
+    background: rgba(255, 255, 255, 0.12);
+    padding: 20px;
+    border-radius: 16px;
+    max-width: 500px;
+}
+
+#nombre {
+    color: #f4c542;
+}
