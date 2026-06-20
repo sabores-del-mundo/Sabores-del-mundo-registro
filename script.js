@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
 
         const datos = await respuesta.json();
-
+        console.log(datos);
         if (datos.encontrado) {
             nombre.textContent = datos.nombre;
         } else {
