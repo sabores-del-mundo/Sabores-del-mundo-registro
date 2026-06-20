@@ -21,16 +21,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 "https://script.google.com/macros/s/AKfycbwcQDGyo0rVFOd1Yt9fYQhwHMOpidgjKP2j67gNR3lbvyv-gCALKrhrxBgDTK214gn6_g/exec",
                 {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
                     body: JSON.stringify({
                         matricula: valor
                     })
                 }
             );
 
-            const datos = await respuesta.json();
+            const texto = await respuesta.text();
+            const datos = JSON.parse(texto);
 
             if (!datos.encontrado) {
                 nombre.textContent = "Participante no encontrado";
