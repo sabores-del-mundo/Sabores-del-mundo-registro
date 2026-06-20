@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sabores del Mundo</title>
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,27 +15,26 @@
         <h2>Congreso de Turismo Gastronómico</h2>
 
         <div class="scanner">
-            📷 Área para escanear el código QR
+            <div id="reader"></div>
         </div>
 
         <div class="bienvenida">
+
             <h3>✅ ¡Bienvenido(a)!</h3>
 
             <h1 id="nombre">
-                Nombre del Asistente
+                Esperando escaneo...
             </h1>
 
             <p>
-                Tu registro de entrada ha sido exitoso.
+                Escanea tu código QR para registrar tu asistencia.
             </p>
 
-            <p>
-                Disfruta el evento.
-            </p>
         </div>
 
     </div>
 
+    <script src="https://unpkg.com/html5-qrcode"></script>
     <script src="script.js"></script>
 
 </body>
