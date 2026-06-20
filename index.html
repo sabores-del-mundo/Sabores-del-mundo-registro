@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sabores del Mundo</title>
-
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,26 +14,39 @@
         <h2>Congreso de Turismo Gastronómico</h2>
 
         <div class="scanner">
-            <div id="reader"></div>
+
+            <h3>Ingrese la matrícula</h3>
+
+            <input
+                type="number"
+                id="matricula"
+                placeholder="Ejemplo: 125381218"
+            >
+
+            <br><br>
+
+            <button id="buscar">
+                Registrar
+            </button>
+
         </div>
 
         <div class="bienvenida">
 
-            <h3>✅ ¡Bienvenido(a)!</h3>
+            <h3>Resultado</h3>
 
             <h1 id="nombre">
-                Esperando escaneo...
+                Esperando matrícula...
             </h1>
 
-            <p>
-                Escanea tu código QR para registrar tu asistencia.
+            <p id="mensaje">
+                Ingrese una matrícula para registrar asistencia.
             </p>
 
         </div>
 
     </div>
 
-    <script src="https://unpkg.com/html5-qrcode"></script>
     <script src="script.js"></script>
 
 </body>
