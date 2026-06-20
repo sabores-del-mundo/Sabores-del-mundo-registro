@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const valor = matricula.value.trim();
 
         if (!valor) {
-
             nombre.textContent = "Ingrese una matrícula";
             mensaje.textContent = "";
             return;
@@ -22,6 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 "https://script.google.com/macros/s/AKfycbwcQDGyo0rVFOd1Yt9fYQhwHMOpidgjKP2j67gNR3lbvyv-gCALKrhrxBgDTK214gn6_g/exec",
                 {
                     method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
                     body: JSON.stringify({
                         matricula: valor
                     })
@@ -31,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const datos = await respuesta.json();
 
             if (!datos.encontrado) {
-
                 nombre.textContent = "Participante no encontrado";
                 mensaje.textContent = "";
                 return;
@@ -40,24 +41,16 @@ document.addEventListener("DOMContentLoaded", () => {
             nombre.textContent = datos.nombre;
 
             if (datos.accion === "entrada") {
-
-                mensaje.textContent =
-                    "✅ Entrada registrada correctamente";
+                mensaje.textContent = "✅ Entrada registrada correctamente";
 
             } else if (datos.accion === "salida") {
-
-                mensaje.textContent =
-                    "👋 Salida registrada correctamente";
+                mensaje.textContent = "👋 Salida registrada correctamente";
 
             } else {
-
-                mensaje.textContent =
-                    "⚠️ Registro completado";
-
+                mensaje.textContent = "⚠️ Registro completado";
             }
 
         } catch (error) {
-
             nombre.textContent = "Error de conexión";
             mensaje.textContent = "";
             console.error(error);
