@@ -21,9 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "https://script.google.com/macros/s/AKfycbwcQDGyo0rVFOd1Yt9fYQhwHMOpidgjKP2j67gNR3lbvyv-gCALKrhrxBgDTK214gn6_g/exec",
                 {
                     method: "POST",
-                    body: JSON.stringify({
-                        matricula: valor
-                    })
+                    body: JSON.stringify({ matricula: valor })
                 }
             );
 
