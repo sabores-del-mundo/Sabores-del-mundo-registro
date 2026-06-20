@@ -1,86 +1,68 @@
-const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbwcQDGyo0rVFOd1Yt9fYQhwHMOpidgjKP2j67gNR3lbvyv-gCALKrhrxBgDTK214gn6_g/exec";
+document.addEventListener("DOMContentLoaded", () => {
 
-let ultimoQR = "";
-const nombre = document.getElementById("nombre");
+    const boton = document.getElementById("buscar");
+    const nombre = document.getElementById("nombre");
+    const mensaje = document.getElementById("mensaje");
+    const matricula = document.getElementById("matricula");
 
-async function registrar(matricula) {
+    boton.addEventListener("click", async () => {
 
-    try {
+        const valor = matricula.value.trim();
 
-        const respuesta = await fetch(URL_SCRIPT, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                matricula: matricula
-            })
-        });
+        if (!valor) {
 
-        const datos = await respuesta.json();
-
-        if (!datos.encontrado) {
-            nombre.textContent = "❌ Participante no encontrado";
+            nombre.textContent = "Ingrese una matrícula";
+            mensaje.textContent = "";
             return;
         }
 
-        if (datos.accion === "entrada") {
+        try {
 
-            nombre.textContent =
-                "✅ " + datos.nombre + " - Entrada registrada";
+            const respuesta = await fetch(
+                "https://script.google.com/macros/s/AKfycbwcQDGyo0rVFOd1Yt9fYQhwHMOpidgjKP2j67gNR3lbvyv-gCALKrhrxBgDTK214gn6_g/exec",
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        matricula: valor
+                    })
+                }
+            );
 
-        } else if (datos.accion === "salida") {
+            const datos = await respuesta.json();
 
-            nombre.textContent =
-                "👋 " + datos.nombre + " - Salida registrada";
+            if (!datos.encontrado) {
 
-        } else {
+                nombre.textContent = "Participante no encontrado";
+                mensaje.textContent = "";
+                return;
+            }
 
-            nombre.textContent =
-                "⚠️ " + datos.nombre + " - Registro completado";
+            nombre.textContent = datos.nombre;
 
+            if (datos.accion === "entrada") {
+
+                mensaje.textContent =
+                    "✅ Entrada registrada correctamente";
+
+            } else if (datos.accion === "salida") {
+
+                mensaje.textContent =
+                    "👋 Salida registrada correctamente";
+
+            } else {
+
+                mensaje.textContent =
+                    "⚠️ Registro completado";
+
+            }
+
+        } catch (error) {
+
+            nombre.textContent = "Error de conexión";
+            mensaje.textContent = "";
+            console.error(error);
         }
 
-    } catch (error) {
-
-        console.error(error);
-
-        nombre.textContent =
-            "❌ Error de conexión";
-
-    }
-}
-
-function iniciarQR() {
-
-    const html5QrCode = new Html5Qrcode("reader");
-
-    html5QrCode.start(
-        { facingMode: "environment" },
-        {
-            fps: 10,
-            qrbox: 250
-        },
-
-        (textoQR) => {
-
-            if (textoQR === ultimoQR) return;
-
-            ultimoQR = textoQR;
-
-            registrar(textoQR);
-
-            setTimeout(() => {
-                ultimoQR = "";
-            }, 3000);
-        }
-    );
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    nombre.textContent = "📷 Esperando escaneo...";
-
-    iniciarQR();
+    });
 
 });
